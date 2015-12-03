@@ -31,6 +31,10 @@ public class DriveTrain extends Subsystem {
 		leftMotors[1].set(lS);
 		
 	}
+	
+	public static void arcadeDrive(double turnVal, double speedPercent){
+		
+	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
