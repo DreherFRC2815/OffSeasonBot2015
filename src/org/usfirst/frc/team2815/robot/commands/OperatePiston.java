@@ -1,5 +1,9 @@
 package org.usfirst.frc.team2815.robot.commands;
 
+import org.usfirst.frc.team2815.robot.OI;
+import org.usfirst.frc.team2815.robot.Robot;
+import org.usfirst.frc.team2815.robot.subsystems.Piston;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +14,7 @@ public class OperatePiston extends Command {
     public OperatePiston() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.pis);
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +23,7 @@ public class OperatePiston extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Piston.operate(OI.getLeftButton(), OI.getRightButton());
     }
 
     // Make this return true when this Command no longer needs to run execute()

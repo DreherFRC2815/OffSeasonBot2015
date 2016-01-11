@@ -14,7 +14,8 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 	static Victor[] rightMotors = new Victor[2];
 	static Victor[] leftMotors = new Victor[2];
-	
+	static double lTarget;
+	static double rTarget;
 	
 	public DriveTrain(){
 		rightMotors[0] = new Victor(RobotMap.rightMotors[0]);
@@ -22,18 +23,23 @@ public class DriveTrain extends Subsystem {
 		leftMotors[0] = new Victor(RobotMap.leftMotors[0]);
 		leftMotors[1] = new Victor(RobotMap.leftMotors[1]); 
 	}
-	
-	public static void tankDrive(double lS, double rS){
-		
-		rightMotors[0].set(rS);
-		rightMotors[1].set(rS);
+	public static void setMotorsToValue(double lS, double rS){
 		leftMotors[0].set(lS);
 		leftMotors[1].set(lS);
+		rightMotors[0].set(rS);
+		rightMotors[1].set(rS);
+	}
+	public static void tankDrive(double lS, double rS){
+		
+		setMotorsToValue(lS, rS);
 		
 	}
 	
-	public static void arcadeDrive(double turnVal, double speedPercent){
+	public static void arcadeDrive(double ySpeed, double turnVal ){
+		lTarget = (ySpeed + turnVal );
+		rTarget = (ySpeed - turnVal);
 		
+		setMotorsToValue(lTarget, rTarget);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

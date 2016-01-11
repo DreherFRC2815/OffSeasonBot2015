@@ -6,9 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team2815.robot.commands.ExampleCommand;
+//import org.usfirst.frc.team2815.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2815.robot.commands.OperatePiston;
+import org.usfirst.frc.team2815.robot.commands.TankDriveWithJoyStick;
+import org.usfirst.frc.team2815.robot.commands.ArcadeDriveWithJoystick;
 import org.usfirst.frc.team2815.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2815.robot.subsystems.ExampleSubsystem;
+//import org.usfirst.frc.team2815.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2815.robot.subsystems.Piston;
 
 
 /**
@@ -22,11 +26,18 @@ public class Robot extends IterativeRobot {
 
 	
 	public static final DriveTrain drivetrain = new DriveTrain();
-	//public static final Solenoid solenoid = new Solenoid();
+	public static final Piston solenoid = new Piston();
+	public static TankDriveWithJoyStick tank;
+	public static ArcadeDriveWithJoystick arc;
+	public static Piston pis;
+	
+	
 	public static OI oi;
 
     Command autonomousCommand;
-
+    Command tankDriveWithJoyStick;
+    Command operatePiston;
+    Command arcadeDriveWithJoystick;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -34,7 +45,12 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+//        autonomousCommand = new ExampleCommand();
+        tank = new TankDriveWithJoyStick();
+        pis = new Piston();
+        arc = new ArcadeDriveWithJoystick();
+        tankDriveWithJoyStick = new TankDriveWithJoyStick();
+        operatePiston = new OperatePiston();
     }
 	
 	public void disabledPeriodic() {
@@ -59,6 +75,9 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+//        tankDriveWithJoyStick.start();
+        arc.start();
+        operatePiston.start();
     }
 
     /**

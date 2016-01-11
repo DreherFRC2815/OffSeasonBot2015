@@ -45,5 +45,14 @@ public class OI {
 	public static double getRightSpeed(){
 		return xbox.getRawAxis(5);
 	}
+	public static double getTurnVal(){
+		return xbox.getRawAxis(4);
+	}
+	public static boolean getLeftButton(){
+		return flight.getRawButton(2);
+	}
+	public static boolean getRightButton(){
+		return flight.getRawButton(3);
+	}
 }
 
